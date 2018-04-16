@@ -90,10 +90,11 @@ class Api
      * @param bool                $async                      (Optional) Indicates if the request to Telegram
      *                                                        will be asynchronous (non-blocking).
      * @param HttpClientInterface $httpClientHandler          (Optional) Custom HTTP Client Handler.
+     * @param array               $guzzle_options
      *
      * @throws TelegramSDKException
      */
-    public function __construct($token = null, $async = false, $httpClientHandler = null)
+    public function __construct($token = null, $async = false, $httpClientHandler = null, $guzzle_options = [])
     {
         $this->accessToken = isset($token) ? $token : getenv(static::BOT_TOKEN_ENV_NAME);
         if (!$this->accessToken) {
@@ -104,7 +105,7 @@ class Api
             $this->setAsyncRequest($async);
         }
 
-        $this->client = new TelegramClient($httpClientHandler);
+        $this->client = new TelegramClient($httpClientHandler, $guzzle_options);
         $this->commandBus = new CommandBus($this);
     }
 
