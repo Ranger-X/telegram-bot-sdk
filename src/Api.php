@@ -833,6 +833,34 @@ class Api
     }
 
     /**
+     * Use this method to change the title of a chat.
+     *
+     * <code>
+     * $params = [
+     *   'chat_id'                  => '',
+     *   'title'                    => '',
+     * ];
+     * </code>
+     *
+     * @link https://core.telegram.org/bots/api#setchattitle
+     *
+     * @param array    $params
+     *
+     * @var int|string $params ['chat_id']
+     * @var string     $params ['title']
+     *
+     * @throws TelegramSDKException
+     *
+     * @return Chat
+     */
+    public function setChatTitle(array $params)
+    {
+        $response = $this->post('setChatTitle', $params);
+
+        return new Chat($response->getDecodedBody());
+    }
+
+    /**
      * Get a list of administrators in a chat.
      *
      * <code>
