@@ -806,6 +806,66 @@ class Api
     }
 
     /**
+     * Use this method to pin a message in a supergroup or a channel.
+     *
+     * The bot must be an administrator in the group for this to work.
+     *
+     * <code>
+     * $params = [
+     *   'chat_id'              => '',
+     *   'message_id'           => '',
+     *   'disable_notification' => '',
+     * ];
+     * </code>
+     *
+     * @link https://core.telegram.org/bots/api#pinchatmessage
+     *
+     * @param array    $params
+     *
+     * @var int|string $params ['chat_id']
+     * @var int        $params ['message_id']
+     * @var bool       $params ['disable_notification']
+     *
+     * @throws TelegramSDKException
+     *
+     * @return bool
+     */
+    public function pinChatMessage(array $params)
+    {
+        $this->post('pinChatMessage', $params);
+
+        return true;
+    }
+
+    /**
+     * Use this method to unpin a message in a supergroup or a channel.
+     *
+     * The bot must be an administrator in the group for this to work.
+     *
+     * <code>
+     * $params = [
+     *   'chat_id'              => '',
+     * ];
+     * </code>
+     *
+     * @link https://core.telegram.org/bots/api#unpinchatmessage
+     *
+     * @param array    $params
+     *
+     * @var int|string $params ['chat_id']
+     *
+     * @throws TelegramSDKException
+     *
+     * @return bool
+     */
+    public function unpinChatMessage(array $params)
+    {
+        $this->post('unpinChatMessage', $params);
+
+        return true;
+    }
+
+    /**
      * Get up to date information about the chat (current name of the user for one-on-one conversations,
      * current username of a user, group or channel,
      *
@@ -851,13 +911,13 @@ class Api
      *
      * @throws TelegramSDKException
      *
-     * @return Chat
+     * @return bool
      */
     public function setChatTitle(array $params)
     {
         $response = $this->post('setChatTitle', $params);
 
-        return new Chat($response->getDecodedBody());
+        return true;
     }
 
     /**
